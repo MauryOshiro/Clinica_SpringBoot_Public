@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="novoPaciente">
+	<div th:replace="layout/mensagemResultado :: mensagemResultado"></div>
+	<form th:action="@{/paciente/cadastrar}" method="post">
+		<div class="row">
+			<!-- Essa tela de cadastro está dividida em 2 colunas de tamanho 6 do Bootsdtrap -->
+			<div class="col-sm-6">
+				<th:block th:object="${pessoaFisica}">
+					<div class="form-group">
+						<label>Nome</label> 
+						<input class="form-control" type="text"
+							placeholder="Ex.: Maury Mitsuyuki" th:field="*{nomePessoaFisica}" />
+					</div>
+
+					<div class="row">
+						<div class="col-sm-10">
+							<div class="form-group">
+								<label>Sobrenome</label> 
+								<input class="form-control" type="text"
+									placeholder="Ex.: Oshiro" th:field="*{sobrenomePessoaFisica}" />
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-group">
+								<label>Sexo</label> 
+								<select class="form-control"
+									th:field="*{sexoPessoaFisica}">
+									<option value="F">F</option>
+									<option value="M">M</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>RG</label> 
+								<input class="form-control" type="text"
+									placeholder="Ex.: 16.052.933-5 até 15 dígitos"
+									th:field="*{rgPessoaFisica}" />
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>CPF</label> 
+								<input class="form-control" type="text"
+									placeholder="Ex.: 16.052.933-5"
+									th:field="*{cpfPessoaFisica}"
+									data-inputmask='"mask": "999.999.999-99"' data-mask />
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label>Data de nascimento</label>
+								<div class="input-group date">
+									<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+									</div>
+									<input class="form-control pull-right" type="text"
+										placeholder="mm/dd/aaaa" id="datepicker"
+										th:field="*{dataNascimentoPessoaFisica}" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label>Nível de escolaridade</label> 
+						<select class="form-control"
+							th:field="*{nivelEscolaridadePessoaFisica}">
+							<option value="Ensino fundamental incompleto">Ensino fundamental incompleto</option>
+							<option value="Ensino fundamental completo">Ensino fundamental completo</option>
+							<option value="Ensino médio incompleto">Ensino médio incompleto</option>
+							<option value="Ensino médio completo">Ensino médio completo</option>
+							<option value="Ensino superior incompleto">Ensino superior incompleto</option>
+							<option value="Ensino superior completo">Ensino superior completo</option>
+						</select>
+					</div>
+				</th:block>
+				<div class="form-group">
+					<label>Origem</label> 
+					<select class="form-control" name="origem">
+						<option value="Clínica">Clínica</option>
+						<option value="Empresa">Empresa</option>
+						<option value="Nenhuma">Nenhuma das opções</option>
+					</select>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<label>Possui convênio?</label>
+						<div class="row">
+							<div class="col-sm-2">
+								<div class="form-group">
+									<div class="radio">
+										<label> 
+										<input class="" type="radio"
+											name="possuiConvenio" value="true" checked> Sim
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<div class="radio">
+										<label> 
+										<input type="radio" name="possuiConvenio"
+											value="false"> Não (particular)
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<th:block th:object="${convenio}">
+								<label>Qual convênio?</label>
+								<select class="form-control" th:field="*{idConvenio}">
+									<option th:each="c : ${convenios}"
+											th:value="${c.idConvenio}"
+											th:text="${c.pessoaJuridica.nomeFantasiaPessoaJuridica}">
+								</select>
+							</th:block>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Segunda coluna do formulário -->
+			<div class="col-sm-6">
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label>Tipo de via</label> 
+							<select class="form-control"
+								name="tipoViaPaciente">
+								<option>Alameda</option>
+								<option>Avenida</option>
+								<option>Beco</option>
+								<option>Estrada</option>
+								<option>Rodovia</option>
+								<option selected="selected">Rua</option>
+								<option>Travessa</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-sm-9">
+						<div class="form-group">
+							<label>Logradouro</label> 
+							<input class="form-control" type="text"
+								placeholder="Ex.: Senador Fláquer" name="logradouroPaciente" />
+						</div>
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label>Número</label> 
+							<input class="form-control" type="number"
+								name="logradouroNumeroPaciente" />
+						</div>
+					</div>
+					<div class="col-sm-9">
+						<div class="form-group">
+							<label>Complemento</label> 
+							<input class="form-control" type="text"
+								placeholder="Apto 20"
+								name="complementoPaciente" />
+						</div>
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Bairro</label> 
+							<input class="form-control" type="text"
+								placeholder="Parque das Nações"
+								name="bairroPaciente" />
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label>CEP</label> 
+							<input class="form-control" type="text"
+								placeholder="09280-290" name="cepPaciente"
+								data-inputmask='"mask": "99999-999"' data-mask />
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label>UF</label> 
+							<select class="form-control" name="ufPaciente">
+								<option>AC</option>
+								<option>AL</option>
+								<option>AP</option>
+								<option>AM</option>
+								<option>BA</option>
+								<option>CE</option>
+								<option>DF</option>
+								<option>ES</option>
+								<option>GO</option>
+								<option>MA</option>
+								<option>MT</option>
+								<option>MS</option>
+								<option>MG</option>
+								<option>PA</option>
+								<option>PB</option>
+								<option>PR</option>
+								<option>PE</option>
+								<option>PI</option>
+								<option>RR</option>
+								<option>RO</option>
+								<option>RJ</option>
+								<option>RN</option>
+								<option>RS</option>
+								<option>SC</option>
+								<option selected="selected">SP</option>
+								<option>SE</option>
+								<option>TO</option>
+							</select>
+						</div>
+					</div>
+				</div>
+	
+				<div class="form-group">
+					<label>Cidade</label> 
+					<input class="form-control" type="text"
+						placeholder="Santo André" name="cidadePaciente" />
+				</div>
+	
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Telefone Principal</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-phone"></i>
+								</div>
+								<input class="form-control" type="text"
+									placeholder="(11) 2222-5555" name="telefonePrincipalPaciente"
+									data-inputmask='"mask": "(99) 9999-9999"' data-mask>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Telefone Alternativo</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-phone"></i>
+								</div>
+								<input class="form-control" type="text"
+									placeholder="(11) 2222-5555" name="telefoneSecundarioPaciente"
+									data-inputmask='"mask": "(99) 9999-9999"' data-mask>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Celular Principal</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-phone"></i>
+								</div>
+								<input class="form-control" type="text"
+									placeholder="(11) 97777-5555" name="celularPrincipalPaciente"
+									data-inputmask='"mask": "(99) 99999-9999"' data-mask>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label>Celular Alternativo</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-phone"></i>
+								</div>
+								<input class="form-control" type="text"
+									placeholder="(11) 97777-5555" name="celularSecundarioPaciente"
+									data-inputmask='"mask": "(99) 99999-9999"' data-mask>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+				<div class="form-group">
+					<label>E-mail</label> 
+					<input class="form-control" type="email"
+						placeholder="Ex.: paciente@gmail.com" name="emailPaciente" />
+				</div>
+	
+				<div class="form-group">
+					<label>Observações (opcional)</label>
+					<textarea class="form-control" rows="3"
+						placeholder="Digite qualquer observação sobre este cadastro"
+						name="observacaoPaciente"></textarea>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-primary" type="submit">Confirmar</button>
+		<button class="btn btn-warning" type="reset">Limpar</button>
+	</form>
+</th:block>

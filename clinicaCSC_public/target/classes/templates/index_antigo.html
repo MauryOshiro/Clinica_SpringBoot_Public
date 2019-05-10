@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragmentos/css :: cabecalho" />
+<body class="skin-green sidebar-mini">
+	<div class="wrapper">
+		<header th:replace="fragmentos/header :: header"></header>
+		<aside th:replace="fragmentos/menuLateral :: menuLateral"></aside>
+		<div class="content-wrapper">
+			<section class="content">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Este index é temporário</h3>
+					</div>
+					<div class="box-body">
+						<!-- CONTE�DO AQUI -->
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div th:replace="fragmentos/js :: javascript"></div>
+</body>
+</html>

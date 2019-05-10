@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layoutBasico :: layout(~{::title})">
+<title>Estado</title>
+</head>
+<body th:replace="layout/layoutBasico :: conteudo(~{::div})">
+	<div class="box box-primary">
+		<th:block>
+			<div class="box-header with-border">
+				<h3 class="box-title">Cadastrar novo estado - TESTE Front Controller</h3>
+			</div>
+			<div class="box-body">
+				<th:block th:replace="cadastros/teste/novoTeste :: novoTeste">
+					
+				</th:block>
+			</div>
+		</th:block>
+	</div>
+</body>
+</html>

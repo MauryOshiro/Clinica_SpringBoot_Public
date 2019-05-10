@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="mensagemResultado">
+	
+	<th:block th:if="${resultado} != null">
+		<!--  
+		<div class="callout callout-danger" th:if="${resultado.erro}">
+			<h4>Erro</h4>
+			<p th:text="${resultado.mensagem}"></p>
+		</div>
+		-->
+		
+		<!--  
+		<div class="callout callout-success" th:if="${!resultado.erro}">
+			<h4>Sucesso</h4>
+			<p th:text="${resultado.mensagem}"></p>
+		</div>
+		-->
+		
+		<div class="alert alert-danger alert-dismissible" th:if="${resultado.erro}">
+			<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+			<h4>Erro</h4>
+			<th:block th:text="${resultado.mensagem}"></th:block>
+		</div>
+		
+		<div class="alert alert-success alert-dismissible" th:if="${!resultado.erro}">
+			<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+			<h4>Sucesso</h4>
+			<th:block th:text="${resultado.mensagem}"></th:block>
+		</div>
+	</th:block>
+	
+</div>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="novoPais">
+	<div th:replace="layout/mensagemResultado :: mensagemResultado"></div>
+	<!--  <form th:action="@{/pais/cadastrar}" method="post"> -->
+		<form th:action="@{/front/pais/cadastrarPais}" method="post">
+		<th:block th:object="${pais}">
+			<div class="row">
+				<div class="col-sm-6">
+					<input type="hidden" th:field="*{idPais}"></input>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('${pais.nomePais}')} ? 'has-error'">
+						<label class="control-label">Nome do país</label> 
+						<label class="control-label" th:if="${#fields.hasErrors('${pais.nomePais}')}">
+							| <i class="fa fa-times-circle-o"></i> Informação inválida!
+						</label> 
+						<input class="form-control" type="text" placeholder="Ex.: Brasil"
+							th:field="*{nomePais}"> 
+						<label th:if="${#fields.hasErrors('${pais.nomePais}')}"
+							th:errors="${pais.nomePais}" class="label-control">
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<button class="btn btn-primary" type="submit">Salvar</button>
+			<button class="btn btn-warning" type="reset">Limpar</button>
+		</th:block>
+	</form>
+</th:block>
+</html>

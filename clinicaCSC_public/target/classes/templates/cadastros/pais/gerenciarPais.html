@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- <head th:replace="fragmentos/css :: cabecalho" /> -->
+<head th:replace="layout/layoutBasico :: layout(~{::title})">
+<title>Gerenciar paises</title>
+</head>
+<body th:replace="layout/layoutBasico :: conteudo(~{::div})">
+	<div class="box box-primary">
+		<th:block>
+			<div class="box-header with-border">
+				<h3 class="box-title">Cadastrar novo país</h3>
+			</div>
+			<div class="box-body">
+				<th:block th:replace="cadastros/pais/novoPais :: novoPais">
+					
+				</th:block>
+			</div>
+		</th:block>
+	</div>
+
+	<div class="box box-primary">
+		<th:block>
+			<div class="box-header with-border">
+				<h3 class="box-title">Consultar países</h3>
+			</div>
+			<div class="box-body">
+				<th:block th:replace="cadastros/pais/consultaPais :: consultarPais">
+					
+				</th:block>
+			</div>
+		</th:block>
+	</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="consultarPais">
+	<form th:action="@{/front/pais/pesquisar}"
+		method="post" th:object="${filtro}">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Descrição</label>
+					<div class="input-group">
+						<input class="form-control" type="text" placeholder="Ex.: Japão"
+							th:field="*{descricao}">
+						<div class="input-group-btn">
+							<button class="btn btn-primary btn-flat" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<div class="box-body table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th id="tabela-cabecalho">Código</th>
+					<th id="tabela-cabecalho">Nome</th>
+					<th id="tabela-cabecalho">Operação</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="pais : ${paises}">
+					<td id="tabela-resultado" th:text="${pais.idPais}"></td>
+					<td id="tabela-resultado" th:text="${pais.nomePais}"></td>
+					<td id="tabela-resultado">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<div class="row">
+									<form th:action="@{/front/pais/{id}(id = ${pais.idPais})}" method="post">
+										<button class="btn btn-primary" type="submit" name="acao" value="editar" id="btn_form">
+											Editar
+										</button>
+										<button class="btn btn-danger" type="submit" name="acao" value="remover" id="btn_form">
+											Remover
+										</button>									
+									</form>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<!-- #lists é um utilitário do framework que permite usar algumas funções para listas retornadas da controller como por exemplo o isEmpty() -->
+					<td th:if="${#lists.isEmpty(paises)}" colspan="6">Nenhum país
+						encontrado</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</th:block>
+</html>

@@ -1,0 +1,30 @@
+.loginCentralizado {
+	position: relative;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+.tabelaAgenda {
+	background-color: #87d2ff;
+}
+
+.table-hover-maury > tbody > tr:hover {
+	background-color: #87d2ff;
+}
+
+#tabela-cabecalho{
+	border-bottom: 2px solid #000;
+}
+
+#tabela-resultado{
+	border-top: 1px solid #ccc;
+}
+
+#divider{
+	background-color: #ccc;
+}
+
+#btn_form{
+	margin-left: 5px;
+	margin-right: 5px;
+}

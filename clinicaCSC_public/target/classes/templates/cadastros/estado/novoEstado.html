@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="novoEstado">
+	<div th:replace="layout/mensagemResultado :: mensagemResultado"></div>
+	<form th:action="@{/estado/cadastrar}" method="post" id="formEstado">
+		<div class="row">
+			<div class="col-sm-6">
+				<th:block th:object="${estado}">
+					<div class="row">
+						<div class="col-sm-6">
+							<input type="hidden" th:field="*{idEstado}"></input>
+							<div class="form-group" th:classappend="${#fields.hasErrors('${estado.nomeEstado}')} ? 'has-error'">
+								<label class="control-label">Estado</label>
+								<label class="control-label" th:if="${#fields.hasErrors('${estado.nomeEstado}')}">
+									| <i class="fa fa-times-circle-o"></i> Informação inválida!
+								</label> 
+								<input class="form-control" type="text" placeholder="Minas Gerais" th:field="*{nomeEstado}">
+								<label th:if="${#fields.hasErrors('${estado.nomeEstado}')}"
+									th:errors="${estado.nomeEstado}" class="label-control">
+								</label>						
+							</div>	
+						</div>
+						
+						<div class="col-sm-6">
+							<div class="form-group" th:classappend="${#fields.hasErrors('${estado.siglaEstado}')} ? 'has-error'">
+								<label class="control-label">Sigla</label>
+								<label class="control-label" th:if="${#fields.hasErrors('${estado.siglaEstado}')}">
+									| <i class="fa fa-times-circle-o"></i> Informação inválida!
+								</label> 
+								<input class="form-control" type="text" placeholder="SP" th:field="*{siglaEstado}">
+								<label th:if="${#fields.hasErrors('${estado.siglaEstado}')}"
+									th:errors="${estado.siglaEstado}" class="label-control">
+								</label>
+							</div>
+						</div>
+					</div>
+				</th:block>
+			</div>
+			<div class="col-sm-6">
+				<th:block th:object="${pais}">
+					<div class="form-group">
+						<label class="control-label">País</label>
+						<select class="form-control" th:field="*{idPais}">
+							<option th:each="pais : ${paises}"
+									th:value="${pais.idPais}"
+									th:text="${pais.nomePais}"
+							/>
+							<!--  
+							<option>País 1</option>
+							<option selected>País 2</option>
+							<option>País 3</option>
+							-->
+							
+						</select>
+					</div>
+				</th:block>	
+			</div>
+		</div>
+		<button class="btn btn-primary" type="submit">Salvar</button>
+		<button class="btn btn-warning" type="reset">Limpar</button>
+	</form>
+</th:block>
+
+</html>

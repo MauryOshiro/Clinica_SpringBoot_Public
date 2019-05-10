@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layoutBasico :: layout(~{::title})">
+<title>Paciente</title>
+</head>
+<body th:replace="layout/layoutBasico :: conteudo(~{::div})">
+	<div class="box box-primary">
+		<th:block>
+			<div class="box-header with-border">
+				<h3 class="box-title">Paciente</h3>
+			</div>
+			<div class="box-body">
+				<th:block th:replace="cadastros/paciente/novoPaciente :: novoPaciente">
+
+				</th:block>
+			</div>
+		</th:block>
+	</div>
+</body>
+
+<script>
+	$(function(){
+		$('.select2').select2()
+		
+		$('#datepicker').datepicker({
+				autoclose: true
+		})
+		
+		$('[data-mask]').inputmask()
+	});
+</script>
+
+</html>
